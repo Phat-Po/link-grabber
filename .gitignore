@@ -1,0 +1,21 @@
+# secrets
+.env
+
+# python / uv
+.venv/
+__pycache__/
+*.pyc
+.uv/
+
+# engines (cloned third-party, re-cloned at setup — keep out of our repo)
+engines/*/
+!engines/.gitkeep
+
+# runtime cache / outputs
+.cache/
+*.mp4
+frames/
+_poc_output/
+
+# os
+.DS_Store
