@@ -17,12 +17,47 @@
 | 抖音 | 视频 | 关键帧 + Whisper 转录 |
 | 微信公众号 | 图文（新旧两版） | 读正文 + 看图 |
 
-## 状态
-🟡 规划完成，待实现。执行规格：[`tasks/TASK-001-build-link-grabber.md`](tasks/TASK-001-build-link-grabber.md)
-
-## Setup（实现后）
+## 安装
 ```bash
 uv sync
-cp .env.example .env   # 填 OBSIDIAN_API_KEY（OPENAI_API_KEY 走环境变量）
-uv run grab "<url>"
+uv run playwright install chromium
+uv run grab --help
 ```
+
+视频转录使用 OpenAI Whisper API，读取环境变量 `OPENAI_API_KEY`。默认会转录视频；如只需要画面关键帧：
+
+```bash
+uv run grab "<url>" --no-transcript
+```
+
+## 使用
+```bash
+uv run grab "http://xhslink.com/o/3GATQJP3HgA"
+uv run grab "https://v.douyin.com/16opyW1Vvmo/" --no-transcript
+uv run grab "https://mp.weixin.qq.com/s/Oo0iksfTXvUSFNnBrWOOpw" --json
+```
+
+默认输出到 `~/.cache/link-grabber/<platform>_<id>/`，并打印 `manifest.md` 绝对路径。agent 应读取 `manifest.md`，再查看其中列出的图片和视频帧。
+
+## 归档到 Obsidian
+仅在显式加 `--save-obsidian` 时写入 Obsidian：
+
+```bash
+uv run grab "<url>" --save-obsidian
+```
+
+需要环境变量：
+- `OPENAI_API_KEY`
+- `OBSIDIAN_API_KEY`
+- `OBSIDIAN_PORT`，默认 `27123`
+
+写入路径为 `WeChat/{AI分类}/YYYY-MM-DD_title.md`，格式与 `wechat-article-summary` 扩展保持一致。
+
+## 安全边界
+- 不登录，不发送平台 Cookie。
+- 公众号使用无登录 Playwright 渲染；遇到「环境异常」会停止并报错。
+- 写 Obsidian 是 opt-in，默认只生成本地 context-pack。
+- Whisper 约按分钟计费；用 `--no-transcript` 可跳过。
+
+## 状态
+🟢 MVP 已实现。执行规格：[`tasks/TASK-001-build-link-grabber.md`](tasks/TASK-001-build-link-grabber.md)

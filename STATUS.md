@@ -2,6 +2,28 @@
 
 ## ▲ Current
 
+## 2026-06-06 | TASK-001 MVP implemented
+
+**Done this session:**
+- Added uv Python project with `grab` console entry.
+- Implemented URL detection, context-pack generation, stable `manifest.md`, and required `caption.md`.
+- Implemented platform adapters:
+  - XHS via `engines/XHS-Downloader`
+  - Douyin via `engines/Douyin_TikTok_Download_API`
+  - WeChat via Playwright dual-format extraction for rich media articles and image posts
+- Implemented video comprehension: ffmpeg frames + OpenAI Whisper transcription.
+- Implemented opt-in Obsidian archive layer with the same summary prompt/note schema as `wechat-article-summary`.
+- Added global skill at `~/.claude/skills/link-grabber/SKILL.md`.
+
+**Current state:**
+- MVP code is present. Third-party engines are copied under ignored `engines/`.
+- Default use writes only local context packs. Obsidian writes require `--save-obsidian`.
+
+**Verification target:**
+- `uv sync`
+- `uv run grab --help`
+- targeted sample grabs from TASK-001, ideally with `--no-transcript` first to avoid Whisper cost.
+
 ## 2026-06-05 | 项目立项 + 完整执行规格就绪（待实现）
 
 **Done this session:**

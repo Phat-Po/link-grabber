@@ -16,6 +16,7 @@ engines/*/
 *.mp4
 frames/
 _poc_output/
+logs/
 
 # os
 .DS_Store
