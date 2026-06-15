@@ -44,4 +44,4 @@ tasks/           规划与执行文档
 ```
 
 ## Status
-🟡 已规划，未实现。完整执行规格见 `tasks/TASK-001-build-link-grabber.md`。
+🟢 MVP 已实现并开源发布。GitHub: [Phat-Po/link-grabber](https://github.com/Phat-Po/link-grabber)

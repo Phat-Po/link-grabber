@@ -18,5 +18,15 @@ frames/
 _poc_output/
 logs/
 
+# claude code / IDE
+.claude/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# marketing / generated assets (keep PNGs tracked, ignore build artifacts)
+marketing/readme-slides/
+
 # os
 .DS_Store

@@ -1,9 +1,11 @@
 [project]
 name = "link-grabber"
-version = "0.1.0"
+version = "1.0.0"
 description = "Turn XHS, Douyin, and WeChat links into agent-readable context packs."
 readme = "README.md"
 requires-python = ">=3.12"
+license = "MIT"
+authors = [{ name = "Phat-Po" }]
 dependencies = [
     "beautifulsoup4>=4.13.4",
     "httpx>=0.28.1",
@@ -23,6 +25,11 @@ dev = [
     "pytest>=9.0.1",
     "ruff>=0.14.6",
 ]
+
+[project.urls]
+Homepage = "https://github.com/Phat-Po/link-grabber"
+Repository = "https://github.com/Phat-Po/link-grabber"
+Issues = "https://github.com/Phat-Po/link-grabber/issues"
 
 [build-system]
 requires = ["hatchling"]
