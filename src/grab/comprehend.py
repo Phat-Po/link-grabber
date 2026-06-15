@@ -9,7 +9,9 @@ from openai import OpenAI
 
 from .models import GrabResult
 
-FRAME_INTERVAL_SEC = int(os.getenv("FRAME_INTERVAL_SEC", os.getenv("LINK_GRABBER_FRAME_INTERVAL_SEC", "4")))
+FRAME_INTERVAL_SEC = int(
+    os.getenv("FRAME_INTERVAL_SEC", os.getenv("LINK_GRABBER_FRAME_INTERVAL_SEC", "4"))
+)
 FRAME_MAX = int(os.getenv("FRAME_MAX", os.getenv("LINK_GRABBER_FRAME_MAX", "40")))
 
 
@@ -28,7 +30,9 @@ async def extract_frames(video: Path, out_dir: Path) -> list[Path]:
     out_dir.mkdir(parents=True, exist_ok=True)
     pattern = out_dir / "frame_%04d.jpg"
     vf = f"fps=1/{FRAME_INTERVAL_SEC}"
-    await _run(["ffmpeg", "-y", "-i", str(video), "-vf", vf, "-frames:v", str(FRAME_MAX), str(pattern)])
+    await _run(
+        ["ffmpeg", "-y", "-i", str(video), "-vf", vf, "-frames:v", str(FRAME_MAX), str(pattern)]
+    )
     return sorted(out_dir.glob("frame_*.jpg"))
 
 
@@ -39,7 +43,9 @@ async def extract_audio(video: Path, audio_path: Path) -> Path:
 
 async def transcribe(video: Path, transcript_path: Path) -> Path:
     if not os.getenv("OPENAI_API_KEY"):
-        raise RuntimeError("OPENAI_API_KEY is required for transcription. Use --no-transcript to skip.")
+        raise RuntimeError(
+            "OPENAI_API_KEY is required for transcription. Use --no-transcript to skip."
+        )
     audio = transcript_path.with_suffix(".mp3")
     await extract_audio(video, audio)
 
@@ -70,7 +76,9 @@ async def comprehend_video(result: GrabResult, no_transcript: bool, no_frames: b
 
 def shutil_available(command: str) -> bool:
     try:
-        subprocess.run([command, "-version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
+        subprocess.run(
+            [command, "-version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False
+        )
     except OSError:
         return False
     return True

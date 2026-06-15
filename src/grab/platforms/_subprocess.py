@@ -20,7 +20,9 @@ def engine_python(engine_dir: Path) -> Path:
     return Path(sys.executable)
 
 
-def run_worker(module: str, engine_dir: Path, payload: dict[str, object], timeout: int = 300) -> dict:
+def run_worker(
+    module: str, engine_dir: Path, payload: dict[str, object], timeout: int = 300
+) -> dict:
     python = engine_python(engine_dir)
     env = os.environ.copy()
     src = PROJECT_ROOT / "src"

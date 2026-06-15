@@ -15,7 +15,9 @@ def _collect_media(root: Path) -> tuple[list[Path], Path | None]:
         for p in root.rglob("*")
         if p.is_file() and p.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp", ".heic"}
     )
-    videos = sorted(p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in {".mp4", ".mov"})
+    videos = sorted(
+        p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in {".mp4", ".mov"}
+    )
     video = videos[0] if videos else None
     return images, video
 

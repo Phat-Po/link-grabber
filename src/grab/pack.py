@@ -32,7 +32,7 @@ def write_manifest(result: GrabResult) -> Path:
     caption = (result.caption or "").strip() or "（无）"
     title = result.title or "Untitled"
     manifest = f"""# [{result.platform}] {title}
-- 作者：{result.author or '未知'} ｜ 日期：{result.publish_date or '未知'} ｜ 来源：{result.source_url} ｜ 类型：{result.content_type}
+- 作者：{result.author or "未知"} ｜ 日期：{result.publish_date or "未知"} ｜ 来源：{result.source_url} ｜ 类型：{result.content_type}
 
 ## 文案 / 正文
 {caption}

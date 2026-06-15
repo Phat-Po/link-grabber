@@ -82,30 +82,30 @@ def build_note(result: GrabResult, summary: dict) -> str:
     return f"""---
 title: "{esc_title}"
 author: "{esc_author}"
-date: "{result.publish_date or ''}"
+date: "{result.publish_date or ""}"
 source: "{result.source_url}"
-category: "{summary.get('category', '其他')}"
+category: "{summary.get("category", "其他")}"
 tags: [{tags}]
-rating: {summary.get('reading_value', 0)}
-reading_time: {summary.get('reading_time_min', 0)}
+rating: {summary.get("reading_value", 0)}
+reading_time: {summary.get("reading_time_min", 0)}
 read: false
 created: "{created}"
 ai_summary: true
 ---
 
-# {result.title or '（无标题）'}
+# {result.title or "（无标题）"}
 
-**{summary.get('one_line_summary', '')}**
+**{summary.get("one_line_summary", "")}**
 
 ## 要点
 
-{key_points or '- （无摘要）'}
+{key_points or "- （无摘要）"}
 
 ---
 
 ## 原文
 
-{result.caption or ''}
+{result.caption or ""}
 
 ## 笔记
 

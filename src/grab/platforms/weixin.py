@@ -87,7 +87,9 @@ EXTRACT_JS = r"""(removeSelectors) => {
 async def _fetch_article(url: str) -> dict:
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
-        ctx = await browser.new_context(user_agent=UA, viewport={"width": 414, "height": 896}, locale="zh-CN")
+        ctx = await browser.new_context(
+            user_agent=UA, viewport={"width": 414, "height": 896}, locale="zh-CN"
+        )
         page = await ctx.new_page()
         try:
             await page.goto(url, wait_until="networkidle", timeout=45000)
@@ -127,7 +129,9 @@ async def _download_images(urls: list[str], root: Path) -> list[Path]:
                     break
             path = image_dir / f"{index}{suffix}"
             try:
-                response = await client.get(url, headers={"User-Agent": UA, "Referer": "https://mp.weixin.qq.com/"})
+                response = await client.get(
+                    url, headers={"User-Agent": UA, "Referer": "https://mp.weixin.qq.com/"}
+                )
                 response.raise_for_status()
             except httpx.HTTPError:
                 continue

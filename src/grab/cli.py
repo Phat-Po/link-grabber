@@ -57,7 +57,9 @@ async def run(
     load_runtime_env()
     summaries = []
     for url in urls:
-        summaries.append(await grab_one(url, out.expanduser(), no_transcript, no_frames, save_to_obsidian))
+        summaries.append(
+            await grab_one(url, out.expanduser(), no_transcript, no_frames, save_to_obsidian)
+        )
     if json_output:
         print_json_summary(summaries)
 
@@ -71,8 +73,12 @@ def main_cmd(
     no_transcript: Annotated[
         bool, typer.Option("--no-transcript", help="Skip OpenAI Whisper transcription.")
     ] = False,
-    no_frames: Annotated[bool, typer.Option("--no-frames", help="Skip ffmpeg frame extraction.")] = False,
-    out: Annotated[Path, typer.Option("--out", help="Context-pack output root.")] = DEFAULT_OUT_ROOT,
+    no_frames: Annotated[
+        bool, typer.Option("--no-frames", help="Skip ffmpeg frame extraction.")
+    ] = False,
+    out: Annotated[
+        Path, typer.Option("--out", help="Context-pack output root.")
+    ] = DEFAULT_OUT_ROOT,
     json_output: Annotated[
         bool, typer.Option("--json", help="Print a machine-readable manifest summary.")
     ] = False,
